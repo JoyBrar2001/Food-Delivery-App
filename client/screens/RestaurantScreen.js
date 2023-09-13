@@ -61,4 +61,8 @@ const RestaurantScreen = () => {
           ))}
         </View>
       </ScrollView >
-    </View 
+    </View >
+  );
+}
+
+export default RestaurantScreen;
