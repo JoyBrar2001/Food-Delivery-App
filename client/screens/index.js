@@ -1,9 +1,13 @@
 import CartScreen from "./CartScreen";
 import HomeScreen from "./HomeScreen";
-import RestaurantCard from "../components/RestaurantCard";
+import RestaurantScreen from "./RestaurantScreen";
+import OrderPreparingScreen from "./OrderPreparingScreen";
+import DeliveryScreen from "./DeliveryScreen";
 
 export {
   CartScreen,
   HomeScreen,
-  RestaurantCard,
+  RestaurantScreen,
+  OrderPreparingScreen,
+  DeliveryScreen,
 };

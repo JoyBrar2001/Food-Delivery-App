@@ -54,7 +54,7 @@ const CartScreen = () => {
           return (
             <View
               key={index}
-              className='flex-row items-center space-x-3 px-4 bg-white mx-2 mb-3 rounded-xl'
+              className='flex-row items-center space-x-3 py-3 px-4 bg-white mx-2 mb-3 rounded-xl'
               style={{
                 shadowColor: 'black',
                 shadowOffset: {
@@ -88,6 +88,35 @@ const CartScreen = () => {
           )
         })}
       </ScrollView>
+
+      <View
+        className='p-6 px-8 rounded-t-3xl space-y-4'
+        style={{ backgroundColor: themeColors.bgColor(0.2) }}
+      >
+        <View className='flex-row justify-between'>
+          <Text className='text-gray-700'>Subtotal</Text>
+          <Text className='text-gray-700'>$20</Text>
+        </View>
+        <View className='flex-row justify-between'>
+          <Text className='text-gray-700'>Delivery Fee</Text>
+          <Text className='text-gray-700'>$2</Text>
+        </View>
+        <View className='flex-row justify-between'>
+          <Text className='text-gray-700 font-bold'>Order Total</Text>
+          <Text className='text-gray-700 font-bold'>$30</Text>
+        </View>
+        <View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('OrderPreparing')}
+            style={{ backgroundColor: themeColors.bgColor(1) }}
+            className='p-3 rounded-full'
+          >
+            <Text className='text-white text-center font-semibold text-lg'>
+              Place Order
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </SafeAreaView>
   )
 }
