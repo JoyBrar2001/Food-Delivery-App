@@ -1,9 +1,14 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { featured } from '../constants';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps'
 import { themeColors } from '../theme';
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+
+FontAwesome.loadFont();
+AntDesign.loadFont();
 
 const DeliveryScreen = () => {
   const restaurant = featured.restaurants[0];
@@ -76,9 +81,21 @@ const DeliveryScreen = () => {
           className='p-2 flex-row justify-between items-center rounded-full my-5 mx-2'
         >
           <View className='p-1 rounded-full' style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}>
-            <Image source={require('../assets/images/deliveryGuy.png')} />
+            <Image source={require('../assets/images/deliveryGuy.png')} className='h-16 w-16 rounded-full' />
           </View>
-        </View> 
+          <View className='flex-1 ml-3'>
+            <Text className='text-lg font-bold text-white'>Syed Noman</Text>
+            <Text className='font-semibold text-white'>Your Rider</Text>
+          </View>
+          <View className='flex-row items-center space-x-3 mr-3'>
+            <TouchableOpacity className='bg-white py-2 px-3 rounded-full'>
+              <FontAwesome name="phone" size={32} color={themeColors.bgColor(1)} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')} className='bg-white p-2 rounded-full'>
+              <AntDesign name="close" size={32} color={themeColors.bgColor(1)} />
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </View>
   );
