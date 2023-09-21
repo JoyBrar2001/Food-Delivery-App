@@ -1,11 +1,13 @@
 import { Image, ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import { themeColors } from '../theme';
 import DishRow from '../components/DishRow';
 import CartIcon from '../components/CartIcon';
+import { useDispatch } from 'react-redux';
+import { setRestaurant } from '../slices/restaurantSlice';
 
 AntDesign.loadFont();
 EvilIcons.loadFont();
@@ -14,6 +16,13 @@ const RestaurantScreen = () => {
   const { params } = useRoute();
   const navigation = useNavigation();
   let item = params;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if(item && item.id){
+      dispatch(setRestaurant({...item}));
+    }
+  },[]);
 
   return (
     <View>

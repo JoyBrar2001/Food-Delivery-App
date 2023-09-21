@@ -1,18 +1,27 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
+import React, { useDebugValue } from 'react';
 import { featured } from '../constants';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps'
 import { themeColors } from '../theme';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectRestaurant } from '../slices/restaurantSlice';
+import { emptyCart } from '../slices/cartSlice';
 
 FontAwesome.loadFont();
 AntDesign.loadFont();
 
 const DeliveryScreen = () => {
-  const restaurant = featured.restaurants[0];
+  const restaurant = useSelector(selectRestaurant);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const cancelOrder = () => {
+    navigation.navigate('Home');
+    dispatch(emptyCart);
+  }
 
   onRegionChange = (region) => {
     console.log(region)
@@ -91,7 +100,7 @@ const DeliveryScreen = () => {
             <TouchableOpacity className='bg-white py-2 px-3 rounded-full'>
               <FontAwesome name="phone" size={32} color={themeColors.bgColor(1)} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')} className='bg-white p-2 rounded-full'>
+            <TouchableOpacity onPress={cancelOrder} className='bg-white p-2 rounded-full'>
               <AntDesign name="close" size={32} color={themeColors.bgColor(1)} />
             </TouchableOpacity>
           </View>

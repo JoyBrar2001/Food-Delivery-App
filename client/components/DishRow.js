@@ -2,11 +2,21 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import { themeColors } from '../theme';
 import { AntDesign } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart, selectCartItemsById } from '../slices/cartSlice';
 
 AntDesign.loadFont();
 
 const DishRow = ({ item }) => {
-  const [ amount, setAmount ] = useState(2);
+  const dispatch = useDispatch();
+  const totalItems = useSelector(state => selectCartItemsById(state, item.id));
+
+  const handleIncrease = () => {
+    dispatch(addToCart({...item}));
+  }
+  const handleDecrease = () => {
+    dispatch(removeFromCart({id: item.id}));
+  }
 
   return (
     <View
@@ -37,17 +47,18 @@ const DishRow = ({ item }) => {
           </Text>
           <View className='flex-row items-center'>
             <TouchableOpacity
+              onPress={handleDecrease}
+              disabled={!totalItems.length}
               className='p-1 rounded-full'
               style={{ backgroundColor: themeColors.bgColor(1) }}
-              onPress={() => setAmount(amount-1)}
               >
               <AntDesign name="minus" size={24} color="white" />
             </TouchableOpacity>
-            <Text className='px-3'>{amount}</Text>
+            <Text className='px-3'>{totalItems.length}</Text>
             <TouchableOpacity
+              onPress={handleIncrease}
               className='p-1 rounded-full'
               style={{ backgroundColor: themeColors.bgColor(1) }}
-              onPress={() => setAmount(amount+1)}
             >
               <AntDesign name="plus" size={24} color="white" />
             </TouchableOpacity>
